@@ -14,6 +14,7 @@ public class VersionsManager {
 	private Document activeDocument;
 	private String filename;
 	private String documentType;
+	private String content;
 	
 	public VersionsManager(VersionsStrategy versionsStrategy, LatexEditorView latexEditorView) {
 		this.strategy = versionsStrategy;
@@ -38,22 +39,22 @@ public class VersionsManager {
 	}
 	
 	public void setCurrentVersion(Document document) {
-		latexEditorView.setCurrentDocument(document);
+		setDocument(document);
 	}
 
 	public String getType() {
 		// TODO Auto-generated method stub
-		return latexEditorView.getType();
+		return getDocumentType();
 	}
-
+	
+	//TODO: Check where this method is called in view package.
 	public void saveContents() {
 		// TODO Auto-generated method stub
-		latexEditorView.saveContents();
-	}
-
-	public void saveToFile() {
-		// TODO Auto-generated method stub
-		latexEditorView.saveToFile();
+		if(isEnabled()) {
+			putVersion(activeDocument);
+			activeDocument.changeVersion();
+		}
+		activeDocument.setContents(content);
 	}
 
 	public void enableStrategy() {
@@ -114,7 +115,7 @@ public class VersionsManager {
 			}
 			else {
 				strategy.removeVersion();
-				latexEditorView.setCurrentDocument(doc);
+				setDocument(doc);
 			}
 		}
 		
@@ -125,20 +126,21 @@ public class VersionsManager {
 		return strategy;
 	}
 	
-	public Document getDocument() {
-		return activeDocument;
-	}
 	
 	public String getDocumentType() {
 		return documentType;
 	}
-	 
+	
 	public void setDocumentType(String newType) {
 		this.documentType = newType;
 	}
 	
 	public String getFilename() {
 		return filename;
+	}
+	
+	public Document getDocument() {
+		return activeDocument;
 	}
 	
 	public void setDocument(Document newDocument) {

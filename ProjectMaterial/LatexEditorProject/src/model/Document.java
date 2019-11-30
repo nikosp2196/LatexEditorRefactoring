@@ -35,7 +35,7 @@ public class Document {
 		this.contents = contents;
 	}
 
-
+	//TODO: Move save() to SaveCommand to keep the same logic with loadToFile().
 	public void save(String filename) {
 		try {
 			PrintWriter printWriter = new PrintWriter(new FileOutputStream(filename));
