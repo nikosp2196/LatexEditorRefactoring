@@ -67,7 +67,7 @@ public class OpeningWindow {
 		});
 		btnCreateNewDocument.setBounds(89, 26, 278, 36);
 		frame.getContentPane().add(btnCreateNewDocument);
-		
+		//TODO: Add enact("load") somewhere here
 		JButton btnOpenExistingDocument = new JButton("Open Existing Document");
 		btnOpenExistingDocument.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

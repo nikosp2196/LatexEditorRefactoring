@@ -43,25 +43,28 @@ public class LoadCommand implements Command {
 		}
 		currentDocument = new Document();
 		currentDocument.setContents(fileContents);
+		type = defineTemplate(fileContents.trim());
+		versionsManager.setDocumentType(type);
+		versionsManager.setDocument(currentDocument);
+	}
+	
+	public String defineTemplate(String inputString) {
 		
-		type = "emptyTemplate";
-		
-		fileContents = fileContents.trim();
-		if(fileContents.startsWith("\\documentclass[11pt,twocolumn,a4paper]{article}")) {
+		String type = "emptyTemplate";
+		if(inputString.startsWith("\\documentclass[11pt,twocolumn,a4paper]{article}")) {
 			type = "articleTemplate";
 		}
-		else if(fileContents.startsWith("\\documentclass[11pt,a4paper]{book}")) {
+		else if(inputString.startsWith("\\documentclass[11pt,a4paper]{book}")) {
 			type = "bookTemplate";
 		}
-		else if(fileContents.startsWith("\\documentclass[11pt,a4paper]{report}")) {
+		else if(inputString.startsWith("\\documentclass[11pt,a4paper]{report}")) {
 			type = "reportTemplate";
 		}
-		else if(fileContents.startsWith("\\documentclass{letter}")) {
+		else if(inputString.startsWith("\\documentclass{letter}")) {
 			type = "letterTemplate";
 		}
 		
-		versionsManager.setDocumentType(type);
-		versionsManager.setDocument(currentDocument);
+		return type;
 	}
 
 }

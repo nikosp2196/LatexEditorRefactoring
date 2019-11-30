@@ -56,11 +56,6 @@ public class VersionsManager {
 		latexEditorView.saveToFile();
 	}
 
-	public void loadFromFile() {
-		// TODO Auto-generated method stub
-		latexEditorView.loadFromFile();
-	}
-
 	public void enableStrategy() {
 		// TODO Auto-generated method stub
 		String strategyType = latexEditorView.getStrategy();
