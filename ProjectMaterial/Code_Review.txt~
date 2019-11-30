@@ -1,0 +1,229 @@
+@@Package  model
+1**Document.class
+
+Responsibilities
+-This class gives us the basic properties of the Documnents, allows us to configure them properly and save it to a specific file.
+
+Collaborators
+------
+
+2**DocumnetManager.class
+
+Responsibilities
+-This class stores Latex templates in a HashMap and gives us a deep copy of a specific template.
+
+Collaborators
+-Document.class
+
+3**VersionsManager.class
+
+Responsibilities
+-This class is responsible for the strategy management but it also uses methods from the LatexEditorView to load and store the different versions.
+
+Collaborators
+-LatexEditorView.class
+-VersionsStrategy.class
+-StableVersionsStrategy.class
+-VolatileVersionsStrategy.class
+-Documents.class
+
+
+@@Package model.strategies
+
+4**VersionsStrategyFactory.class
+
+Responsibilities
+-This class creates the VersionsStrategies(Stable & Volatile) and returns the specified strategy.
+
+Collaborators
+-VersionsStrategy.class
+-StableVersionsStrategy.class
+-VolatileVersionsStrategy.class
+
+5**VersionsStrategy.class
+
+Responsibilities
+-This class gives us the interface for the differentnt Version Strategies.
+
+Collaborators
+-Document.class
+
+6**StableVersionStrategy.class
+
+Responsibilities
+-This class is responsible for the file-based versioning type.
+
+Collaborators
+-Document.class
+-VersionStrategy.class
+
+7**VolatileStrategy.class
+
+Responsibilities
+-This class is responsible for the memory-based versioning type.
+
+Collaborators
+-Document.class
+-VersionStrategy.class
+
+
+@@Package controller
+
+8**LatexEditorController.class
+
+Responsibilies
+-This class stores the available commands in a HashMap and enacts a particular command.
+
+Collaborators
+-CommandFactory.class
+-Command.class
+
+@@Package controller.commands
+
+9**Command.class
+
+Responsibilities
+-This class specifies the interface for the commands.
+
+Collaborators
+-----
+
+10**CommandFactory.class
+
+Responsibilities
+-This class is responsible for the creation of the specified command object.
+
+Collaborators
+-DocumentManager.class
+-VersionsManager.class
+
+11**AddLatex.class
+
+Responsibilities
+-This class updates the document changes and saves and creates a new version of the document when a version strategy is enabled.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+12**ChangeVersionsStrategyCommand.class
+
+Responsibilities
+-This class reverts the current VersionStrategy.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+13**CreateCommand.class
+
+Responsibilities
+-This class creates a document according to a specific template.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+14**EditCommand.class
+
+Responsibilities
+-This class updates the document changes and saves and creates a new version of the document when a version strategy is enabled.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+15**DisableVersionsManagementCommand.class
+
+Responsibilities
+-This class disables the current VersionStrategy.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+16**EnableVersionsManagementCommand.class
+
+Responsibilities
+-This class enables the current VersionStrategy.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+17**LoadCommand.class
+
+Responsibilities
+-This class loads a document from a specific file and finds out its template type from the first line of the document.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+18**RollbackToPreviousVersionCommand.class
+
+Responsibilities
+-This class removes the current version of the document and set it to the previous version if the version strategy is enabled.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+19**SaveCommand.class
+
+Responsibilities
+-This class saves the document to a file.
+
+Collaborators
+-Command.class
+-VersionsManager.class
+
+
+@@package view
+20**MainWindow.class
+
+Responsibilities
+-This class adds the Latex Commands,  creates and initializes the MainWindow.
+
+Collaborators
+-LatexEditorView.class
+-Document.class
+
+21**OpeningWinodw.class
+
+Responsibilities
+-This class creates and initializes the opening window.
+
+Collaborators
+-LatexEditorView.class
+-LatexEditorController.class
+-VersionsManager.class
+-VersionsStrategy.class
+-VolatileVersionsStrategy.class
+-ChooseTemplate.class
+
+**ChooseTemplate.class
+
+Responsibilities
+-This class creates and initializes the chooseTemplate window.
+
+Collaborators
+-MainWindow.class
+-LatexEditorView.class
+-OpeningWindow.class
+
+**LatexEditorView.class
+
+Responsibilities
+-This class has a lot of setters and getters, saves and loads Documents.
+
+Collaborators
+-LatexEditorController.class
+-Document.class
+-VersionsManager.class
+
+
+
+
+
+
