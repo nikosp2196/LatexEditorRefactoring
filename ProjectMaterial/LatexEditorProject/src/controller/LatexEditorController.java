@@ -14,11 +14,14 @@ import controller.commands.LoadCommand;
 import controller.commands.RollbackToPreviousVersionCommand;
 import controller.commands.SaveCommand;
 import model.VersionsManager;
+import model.strategies.VolatileVersionsStrategy;
 
 public class LatexEditorController{
 	private HashMap<String, Command> commands;
+	private VersionsManager versionsManager;
 	
-	public LatexEditorController(VersionsManager versionsManager) {
+	public LatexEditorController() {
+		versionsManager = new VersionsManager(new VolatileVersionsStrategy());
 		CommandFactory commandFactory = new CommandFactory(versionsManager);
 		
 		commands = new HashMap<String, Command>(); 
@@ -36,5 +39,9 @@ public class LatexEditorController{
 	
 	public void enact(String command) {
 		commands.get(command).execute();
+	}
+	
+	public VersionsManager getVersionsManager() {
+		return versionsManager;
 	}
 }

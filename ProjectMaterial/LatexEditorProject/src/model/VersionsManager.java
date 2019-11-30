@@ -10,15 +10,13 @@ import view.LatexEditorView;
 public class VersionsManager {
 	private boolean enabled;
 	private VersionsStrategy strategy;
-	private LatexEditorView latexEditorView;
 	private Document activeDocument;
 	private String filename;
 	private String documentType;
 	private String content;
 	
-	public VersionsManager(VersionsStrategy versionsStrategy, LatexEditorView latexEditorView) {
+	public VersionsManager(VersionsStrategy versionsStrategy) {
 		this.strategy = versionsStrategy;
-		this.latexEditorView = latexEditorView;
 		enabled = false;
 	}
 	
@@ -34,10 +32,7 @@ public class VersionsManager {
 		enabled = false;
 	}
 	
-	public void setStrategy(VersionsStrategy strategy) {
-		this.strategy = strategy;
-	}
-	
+	//TODO: Useless method same as setDocument().
 	public void setCurrentVersion(Document document) {
 		setDocument(document);
 	}
@@ -82,7 +77,7 @@ public class VersionsManager {
 	}
 
 	public void changeStrategy() {
-		// TODO Auto-generated method stub
+		// TODO: Klaiw xaxaxaxaxa fix this!!!!!
 		String strategyType = latexEditorView.getStrategy();
 		if(strategyType.equals("stable") && strategy instanceof VolatileVersionsStrategy) {
 			VersionsStrategy newStrategy = new StableVersionsStrategy();
@@ -126,6 +121,9 @@ public class VersionsManager {
 		return strategy;
 	}
 	
+	public void setStrategy(VersionsStrategy strategy) {
+		this.strategy = strategy;
+	}
 	
 	public String getDocumentType() {
 		return documentType;
@@ -139,11 +137,19 @@ public class VersionsManager {
 		return filename;
 	}
 	
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	
 	public Document getDocument() {
 		return activeDocument;
 	}
 	
 	public void setDocument(Document newDocument) {
 		this.activeDocument = newDocument;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
 	}
 }
