@@ -266,11 +266,12 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				//TODO: Fix the args choose either String or Strategy
 				latexEditorController.getVersionsManager().setStrategy("stable");
-				if(latexEditorController.getVersionsManager().isEnabled() == false) {
-					latexEditorController.enact("enableVersionsManagement");
+				if(latexEditorController.getVersionsManager().isEnabled()) {
+					latexEditorController.enact("changeVersionsStrategy");
+					
 				}
 				else {
-					latexEditorController.getController().enact("changeVersionsStrategy");
+					latexEditorController.enact("enableVersionsManagement");
 				}
 				menuVolatile.setSelected(false);
 				menuStable.setEnabled(false);
@@ -283,10 +284,10 @@ public class MainWindow {
 				
 				latexEditorController.setStrategy("volatile");
 				if(latexEditorController.getVersionsManager().isEnabled() == false) {
-					latexEditorController.getController().enact("enableVersionsManagement");
+					latexEditorController.enact("enableVersionsManagement");
 				}
 				else {
-					latexEditorController.getController().enact("changeVersionsStrategy");
+					latexEditorController.enact("changeVersionsStrategy");
 				}
 				menuStable.setSelected(false);
 				menuVolatile.setEnabled(false);
@@ -300,7 +301,11 @@ public class MainWindow {
 		JMenuItem mntmDisable = new JMenuItem("Disable");
 		mntmDisable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				latexEditorController.getController().enact("disableVersionsManagement");
+				latexEditorController.enact("disableVersionsManagement");
+				menuStable.setEnabled(true);
+				menuVolatile.setEnabled(true);
+				menuStable.setSelected(false);
+				menuVolatile.setSelected(false);
 			}
 		});
 		mnStrategy.add(mntmDisable);
@@ -308,8 +313,8 @@ public class MainWindow {
 		JMenuItem mntmRollback = new JMenuItem("Rollback");
 		mntmRollback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				latexEditorController.getController().enact("rollbackToPreviousVersion");
-				Document doc = latexEditorController.getCurrentDocument();
+				latexEditorController.enact("rollbackToPreviousVersion");
+				Document doc = latexEditorController.getVersionsManager().getDocument();
 				editorPane.setText(doc.getContents());
 			}
 		});
@@ -320,6 +325,6 @@ public class MainWindow {
 		frame.getContentPane().add(scrollPane);
 		scrollPane.setViewportView(editorPane);
 		
-		editorPane.setText(latexEditorController.getCurrentDocument().getContents());
+		editorPane.setText(latexEditorController.getVersionsManager().getDocument().getContents());
 	}
 }

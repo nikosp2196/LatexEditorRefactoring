@@ -122,7 +122,7 @@ public class ChooseTemplate {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(previous.equals("main")) {
-					MainWindow mainWindow = new MainWindow(latexEditorView);
+					MainWindow mainWindow = new MainWindow(latexEditorController);
 					frame.dispose();
 				}
 				else {

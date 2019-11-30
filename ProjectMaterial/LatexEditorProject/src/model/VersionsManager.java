@@ -9,14 +9,14 @@ import view.LatexEditorView;
 
 public class VersionsManager {
 	private boolean enabled;
-	private VersionsStrategy strategy;
+	private String strategy;
 	private Document activeDocument;
 	private String filename;
 	private String documentType;
 	private String content;
 	
-	public VersionsManager(VersionsStrategy versionsStrategy) {
-		this.strategy = versionsStrategy;
+	public VersionsManager() {
+		this.strategy = "";
 		enabled = false;
 	}
 	
@@ -55,25 +55,19 @@ public class VersionsManager {
 	public void enableStrategy() {
 		// TODO Auto-generated method stub
 		String strategyType = latexEditorView.getStrategy();
-		if(strategyType.equals("volatile") && strategy instanceof VolatileVersionsStrategy) {
-			enable();
-		}
-		else if(strategyType.equals("stable") && strategy instanceof VolatileVersionsStrategy) {
-			//allagh apo to ena sto allo
-			VersionsStrategy newStrategy = new StableVersionsStrategy();
-			newStrategy.setEntireHistory(strategy.getEntireHistory());
-			strategy = newStrategy;
-			enable();
+		
+		if(strategyType.equals("stable") && strategy instanceof VolatileVersionsStrategy) {
+	
+			changeStrategy();
+			
 		}
 		else if(strategyType.equals("volatile") && strategy instanceof StableVersionsStrategy) {
-			VersionsStrategy newStrategy = new VolatileVersionsStrategy();
-			newStrategy.setEntireHistory(strategy.getEntireHistory());
-			strategy = newStrategy;
-			enable();
+
+			changeStrategy();
+		
 		}
-		else if(strategyType.equals("stable") && strategy instanceof StableVersionsStrategy) {
-			enable();
-		}
+		enable();
+		
 	}
 
 	public void changeStrategy() {
@@ -116,12 +110,12 @@ public class VersionsManager {
 		
 	}
 
-	public VersionsStrategy getStrategy() {
+	public String getStrategy() {
 		// TODO Auto-generated method stub
 		return strategy;
 	}
 	
-	public void setStrategy(VersionsStrategy strategy) {
+	public void setStrategy(String strategy) {
 		this.strategy = strategy;
 	}
 	
