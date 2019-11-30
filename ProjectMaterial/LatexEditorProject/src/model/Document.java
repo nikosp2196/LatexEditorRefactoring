@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
 public class Document {
+	private String name;
 	private String author;
 	private String date;
 	private String copyright;

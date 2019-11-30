@@ -11,11 +11,14 @@ public class VersionsManager {
 	private boolean enabled;
 	private VersionsStrategy strategy;
 	private LatexEditorView latexEditorView;
-
+	private Document activeDocument;
+	private String filename;
+	private String documentType;
 	
 	public VersionsManager(VersionsStrategy versionsStrategy, LatexEditorView latexEditorView) {
 		this.strategy = versionsStrategy;
 		this.latexEditorView = latexEditorView;
+		enabled = false;
 	}
 	
 	public boolean isEnabled() {
@@ -125,5 +128,25 @@ public class VersionsManager {
 	public VersionsStrategy getStrategy() {
 		// TODO Auto-generated method stub
 		return strategy;
+	}
+	
+	public Document getDocument() {
+		return activeDocument;
+	}
+	
+	public String getDocumentType() {
+		return documentType;
+	}
+	 
+	public void setDocumentType(String newType) {
+		this.documentType = newType;
+	}
+	
+	public String getFilename() {
+		return filename;
+	}
+	
+	public void setDocument(Document newDocument) {
+		this.activeDocument = newDocument;
 	}
 }
