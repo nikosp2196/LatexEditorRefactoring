@@ -265,10 +265,9 @@ public class MainWindow {
 		menuStable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO: Fix the args choose either String or Strategy
-				latexEditorController.getVersionsManager().setStrategy("stable");
+				latexEditorController.getVersionsManager().setStrategyString("stable");
 				if(latexEditorController.getVersionsManager().isEnabled()) {
 					latexEditorController.enact("changeVersionsStrategy");
-					
 				}
 				else {
 					latexEditorController.enact("enableVersionsManagement");
@@ -282,7 +281,7 @@ public class MainWindow {
 		menuVolatile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				latexEditorController.setStrategy("volatile");
+				latexEditorController.getVersionsManager().setStrategyString("volatile");
 				if(latexEditorController.getVersionsManager().isEnabled() == false) {
 					latexEditorController.enact("enableVersionsManagement");
 				}
@@ -326,5 +325,10 @@ public class MainWindow {
 		scrollPane.setViewportView(editorPane);
 		
 		editorPane.setText(latexEditorController.getVersionsManager().getDocument().getContents());
+		// Just enable the volatile versionsStrategy by default
+		menuStable.setSelected(false);
+		menuVolatile.setSelected(true);
+		menuVolatile.setEnabled(false);
+		menuStable.setEnabled(true);
 	}
 }

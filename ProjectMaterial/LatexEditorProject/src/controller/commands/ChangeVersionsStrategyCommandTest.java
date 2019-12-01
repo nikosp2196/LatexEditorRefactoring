@@ -20,11 +20,11 @@ class ChangeVersionsStrategyCommandTest {
 	@Test
 	void testVolatile() {
 		VersionsStrategy strategy = new VolatileVersionsStrategy();
-		versionsManager.setStrategy(strategy);
+		versionsManager.setStrategyString(strategy);
 		
 		latexEditorView.setType("articleTemplate");
 		latexEditorView.setVersionsManager(versionsManager);
-		latexEditorView.setStrategy("stable");
+		latexEditorView.setStrategyString("stable");
 		changeCommand.execute();
 		
 		String test = "test ok";
@@ -37,11 +37,11 @@ class ChangeVersionsStrategyCommandTest {
 	@Test
 	void testStable() {
 		VersionsStrategy strategy = new StableVersionsStrategy();
-		versionsManager.setStrategy(strategy);
+		versionsManager.setStrategyString(strategy);
 		
 		latexEditorView.setType("articleTemplate");
 		latexEditorView.setVersionsManager(versionsManager);
-		latexEditorView.setStrategy("volatile");
+		latexEditorView.setStrategyString("volatile");
 		changeCommand.execute();
 		
 		String test = "test ok";

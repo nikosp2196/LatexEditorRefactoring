@@ -1,23 +1,24 @@
 package model;
 
 import javax.swing.JOptionPane;
-
-import model.strategies.StableVersionsStrategy;
 import model.strategies.VersionsStrategy;
-import model.strategies.VolatileVersionsStrategy;
-import view.LatexEditorView;
+import model.strategies.VersionsStrategyFactory;
+
 
 public class VersionsManager {
 	private boolean enabled;
-	private String strategy;
+	private VersionsStrategyFactory factory;
+	private String strategyString;
+	private VersionsStrategy strategy;
 	private Document activeDocument;
 	private String filename;
 	private String documentType;
 	private String content;
 	
 	public VersionsManager() {
-		this.strategy = "";
-		enabled = false;
+		factory = new VersionsStrategyFactory();
+		strategy = factory.createStrategy("volatile");
+		enabled = true;
 	}
 	
 	public boolean isEnabled() {
@@ -54,37 +55,15 @@ public class VersionsManager {
 
 	public void enableStrategy() {
 		// TODO Auto-generated method stub
-		String strategyType = latexEditorView.getStrategy();
-		
-		if(strategyType.equals("stable") && strategy instanceof VolatileVersionsStrategy) {
-	
-			changeStrategy();
-			
-		}
-		else if(strategyType.equals("volatile") && strategy instanceof StableVersionsStrategy) {
-
-			changeStrategy();
-		
-		}
+		setStrategy();
 		enable();
 		
 	}
 
-	public void changeStrategy() {
-		// TODO: Klaiw xaxaxaxaxa fix this!!!!!
-		String strategyType = latexEditorView.getStrategy();
-		if(strategyType.equals("stable") && strategy instanceof VolatileVersionsStrategy) {
-			VersionsStrategy newStrategy = new StableVersionsStrategy();
-			newStrategy.setEntireHistory(strategy.getEntireHistory());
-			strategy = newStrategy;
-			enable();
-		}
-		else if(strategyType.equals("volatile") && strategy instanceof StableVersionsStrategy) {
-			VersionsStrategy newStrategy = new VolatileVersionsStrategy();
-			newStrategy.setEntireHistory(strategy.getEntireHistory());
-			strategy = newStrategy;
-			enable();
-		}
+	public void setStrategy() {
+		VersionsStrategy newStrategy = factory.createStrategy(strategyString);
+		newStrategy.setEntireHistory(strategy.getEntireHistory());
+		strategy = newStrategy;
 	}
 
 	public void  putVersion(Document document) {
@@ -110,13 +89,13 @@ public class VersionsManager {
 		
 	}
 
-	public String getStrategy() {
+	public String getStrategyString() {
 		// TODO Auto-generated method stub
-		return strategy;
+		return strategyString;
 	}
 	
-	public void setStrategy(String strategy) {
-		this.strategy = strategy;
+	public void setStrategyString(String strategyString) {
+		this.strategyString = strategyString;
 	}
 	
 	public String getDocumentType() {

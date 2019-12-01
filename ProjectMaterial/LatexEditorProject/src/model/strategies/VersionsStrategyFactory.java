@@ -7,8 +7,8 @@ public class VersionsStrategyFactory {
 	
 	public VersionsStrategyFactory() {
 		strategies = new HashMap<String, VersionsStrategy>();
-		strategies.put("volatileStrategy", new VolatileVersionsStrategy());
-		strategies.put("stableStrategy", new StableVersionsStrategy());
+		strategies.put("volatile", new VolatileVersionsStrategy());
+		strategies.put("stable", new StableVersionsStrategy());
 	}
 	public VersionsStrategy createStrategy(String type) {
 		return strategies.get(type);

@@ -24,13 +24,13 @@ class RollbackToPreviousVersionCommandTest {
 	@Test
 	void testStable() {
 		VersionsStrategy strategy = new StableVersionsStrategy();
-		versionsManager.setStrategy(strategy);
+		versionsManager.setStrategyString(strategy);
 		
 		latexEditorView.setType("articleTemplate");
 		latexEditorView.setVersionsManager(versionsManager);
 		createCommand.execute();
 		String actualContents = latexEditorView.getCurrentDocument().getContents();
-		latexEditorView.setStrategy("stable");
+		latexEditorView.setStrategyString("stable");
 		enableCommand.execute();
 		latexEditorView.setText("test edit contents\n");
 		editCommand.execute();

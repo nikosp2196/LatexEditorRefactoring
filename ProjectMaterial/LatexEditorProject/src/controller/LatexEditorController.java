@@ -2,26 +2,16 @@ package controller;
 
 import java.util.HashMap;
 
-import controller.commands.AddLatexCommand;
-import controller.commands.ChangeVersionsStrategyCommand;
 import controller.commands.Command;
 import controller.commands.CommandFactory;
-import controller.commands.CreateCommand;
-import controller.commands.DisableVersionsManagementCommand;
-import controller.commands.EditCommand;
-import controller.commands.EnableVersionsManagementCommand;
-import controller.commands.LoadCommand;
-import controller.commands.RollbackToPreviousVersionCommand;
-import controller.commands.SaveCommand;
 import model.VersionsManager;
-import model.strategies.VolatileVersionsStrategy;
 
 public class LatexEditorController{
 	private HashMap<String, Command> commands;
 	private VersionsManager versionsManager;
 	
 	public LatexEditorController() {
-		versionsManager = new VersionsManager(new VolatileVersionsStrategy());
+		versionsManager = new VersionsManager();
 		CommandFactory commandFactory = new CommandFactory(versionsManager);
 		
 		commands = new HashMap<String, Command>(); 

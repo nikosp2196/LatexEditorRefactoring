@@ -22,12 +22,12 @@ class DisableVersionsManagementCommandTest {
 	@Test
 	void testVolatile() {
 		VersionsStrategy strategy = new VolatileVersionsStrategy();
-		versionsManager.setStrategy(strategy);
+		versionsManager.setStrategyString(strategy);
 		
 		latexEditorView.setType("articleTemplate");
 		latexEditorView.setVersionsManager(versionsManager);
 		createCommand.execute();
-		latexEditorView.setStrategy("volatile");
+		latexEditorView.setStrategyString("volatile");
 		disableCommand.execute();
 		latexEditorView.setText("test edit contents\n");
 		editCommand.execute();
