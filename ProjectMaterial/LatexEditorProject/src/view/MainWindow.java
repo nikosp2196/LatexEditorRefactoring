@@ -5,7 +5,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import controller.LatexEditorController;
-import model.Document;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
@@ -270,8 +269,7 @@ public class MainWindow {
 		mntmRollback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				latexEditorController.enact("rollbackToPreviousVersion");
-				Document doc = latexEditorController.getVersionsManager().getDocument();
-				editorPane.setText(doc.getContents());
+				editorPane.setText(latexEditorController.getVersionsManager().getDocument().getContents());
 			}
 		});
 		mnStrategy.add(mntmRollback);
