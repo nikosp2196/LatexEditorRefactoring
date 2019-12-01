@@ -2,14 +2,11 @@ package controller.commands;
 
 import model.VersionsManager;
 
-public class RollbackToPreviousVersionCommand implements Command {
-	private VersionsManager versionsManager;
-	
+public class RollbackToPreviousVersionCommand extends AbstractCommand {
 	
 	public RollbackToPreviousVersionCommand(VersionsManager versionsManager) {
-		this.versionsManager = versionsManager;
+		super(versionsManager);
 	}
-
 
 	@Override
 	public void execute() {

@@ -4,18 +4,20 @@ import java.util.HashMap;
 
 import controller.commands.Command;
 import controller.commands.CommandFactory;
+import model.LatexSyntaxManager;
 import model.VersionsManager;
 
 public class LatexEditorController{
 	private HashMap<String, Command> commands;
 	private VersionsManager versionsManager;
+	private LatexSyntaxManager syntaxManager;
 	
 	public LatexEditorController() {
 		versionsManager = new VersionsManager();
 		CommandFactory commandFactory = new CommandFactory(versionsManager);
 		
 		commands = new HashMap<String, Command>(); 
-		commands.put("addLatex", commandFactory.createCommand("addLatex"));
+		//commands.put("addLatex", commandFactory.createCommand("addLatex"));
 		commands.put("changeVersionsStrategy", commandFactory.createCommand("changeVersionsStrategy"));
 		commands.put("create", commandFactory.createCommand("create"));
 		commands.put("disableVersionsManagement", commandFactory.createCommand("disableVersionsManagement"));
@@ -33,5 +35,13 @@ public class LatexEditorController{
 	
 	public VersionsManager getVersionsManager() {
 		return versionsManager;
+	}
+	
+	public String initializeSyntaxManager(String before, String after, String newSyntax) {
+		
+		syntaxManager = new LatexSyntaxManager(before, after);
+		String newContent = syntaxManager.addSyntax(newSyntax);
+		versionsManager.setContent(newContent);
+		return newContent;
 	}
 }

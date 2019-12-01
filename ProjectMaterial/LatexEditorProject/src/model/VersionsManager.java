@@ -48,7 +48,7 @@ public class VersionsManager {
 		// TODO Auto-generated method stub
 		if(isEnabled()) {
 			putVersion(activeDocument);
-			activeDocument.changeVersion();
+			activeDocument.increaseVersionID();
 		}
 		activeDocument.setContents(content);
 	}
@@ -57,7 +57,6 @@ public class VersionsManager {
 		// TODO Auto-generated method stub
 		setStrategy();
 		enable();
-		
 	}
 
 	public void setStrategy() {
@@ -73,18 +72,16 @@ public class VersionsManager {
 
 	public void rollbackToPreviousVersion() {
 		// TODO Auto-generated method stub
-		if(isEnabled() == false) {
-			JOptionPane.showMessageDialog(null, "Strategy is not enabled", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
-		}
-		else {
+		if(isEnabled()) {
 			Document doc = strategy.getVersion();
 			if(doc == null) {
 				JOptionPane.showMessageDialog(null, "No version available", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
-			}
-			else {
+			}else{
 				strategy.removeVersion();
 				setDocument(doc);
 			}
+		}else{
+			JOptionPane.showMessageDialog(null, "Strategy is not enabled", "InfoBox", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}

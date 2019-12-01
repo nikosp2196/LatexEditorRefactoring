@@ -7,20 +7,10 @@ import java.util.Scanner;
 import model.Document;
 import model.VersionsManager;
 
-public class LoadCommand implements Command {
-	private VersionsManager versionsManager;
+public class LoadCommand extends AbstractCommand {
 	
 	public LoadCommand(VersionsManager versionsManager) {
-		super();
-		this.versionsManager = versionsManager;
-	}
-
-	public VersionsManager getVersionsManager() {
-		return versionsManager;
-	}
-
-	public void setVersionsManager(VersionsManager versionsManager) {
-		this.versionsManager = versionsManager;
+		super(versionsManager);
 	}
 
 	@Override

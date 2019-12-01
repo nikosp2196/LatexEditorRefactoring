@@ -19,17 +19,14 @@ public class Document {
 		this.contents = contents;
 	}
 	
-	
 	public Document() {
 		// TODO Auto-generated constructor stub
 		this.contents = "";
 	}
 
-
 	public String getContents() {
 		return contents;
 	}
-
 
 	public void setContents(String contents) {
 		this.contents = contents;
@@ -52,7 +49,7 @@ public class Document {
 		return new Document(author, date, copyright, versionID, contents);
 	}
 
-	public void changeVersion() {
+	public void increaseVersionID() {
 		int n = Integer.parseInt(versionID);
 		versionID = (n + 1) + "";
 	}
