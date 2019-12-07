@@ -13,17 +13,17 @@
   </package>  
   <package id="3" language="java" name="controller.commands" project="Tech_Guys" 
     file="/Tech_Guys/src/controller/commands" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="48" width="146" x="436" y="285"/>    
+    <position height="-1" width="-1" x="578" y="249"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="4" language="java" name="model.strategies" project="Tech_Guys" file="/Tech_Guys/src/model/strategies" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="48" width="120" x="821" y="192"/>    
+    <position height="-1" width="-1" x="911" y="239"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <package id="5" language="java" name="model" project="Tech_Guys" file="/Tech_Guys/src/model" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="48" width="100" x="884" y="24"/>    
+    <position height="-1" width="-1" x="904" y="105"/>    
     <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
   <dependency id="6">    

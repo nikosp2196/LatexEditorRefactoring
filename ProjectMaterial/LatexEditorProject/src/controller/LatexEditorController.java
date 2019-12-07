@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import controller.commands.Command;
 import controller.commands.CommandFactory;
+import model.FileManager;
 import model.LatexSyntaxManager;
 import model.VersionsManager;
 

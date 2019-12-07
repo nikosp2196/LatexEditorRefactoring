@@ -1,5 +1,6 @@
 package controller.commands;
 
+import model.FileManager;
 import model.VersionsManager;
 
 public class SaveCommand extends AbstractCommand {
@@ -11,7 +12,8 @@ public class SaveCommand extends AbstractCommand {
 	public void execute() {
 		// TODO Auto-generated method stub
 		String filename = versionsManager.getFilename();
-		versionsManager.getDocument().save(filename);
+		FileManager fManager = new FileManager(versionsManager);
+		fManager.saveToFile(filename);
 	}
 
 }
