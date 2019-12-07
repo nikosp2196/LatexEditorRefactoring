@@ -12,26 +12,15 @@ public class LatexEditorController{
 	private HashMap<String, Command> commands;
 	private VersionsManager versionsManager;
 	private LatexSyntaxManager syntaxManager;
-	
+	private String[] commandList = {"loadRot13", "saveRot13", "loadAtbash", "saveAtbash", "changeVersionsStrategy", "create", 
+			"disableVersionsManagement", "edit", "enableVersionsManagement", "load", "rollbackToPreviousVersion", "save"};
 	public LatexEditorController() {
 		versionsManager = new VersionsManager();
 		CommandFactory commandFactory = new CommandFactory(versionsManager);
-		
-		commands = new HashMap<String, Command>(); 
-		commands.put("loadRot13", commandFactory.createCommand("loadRot13"));
-		commands.put("saveRot13", commandFactory.createCommand("saveRot13"));
-		commands.put("loadAtbash", commandFactory.createCommand("loadAtbash"));
-		commands.put("saveAtbash", commandFactory.createCommand("saveAtbash"));
-		commands.put("changeVersionsStrategy", commandFactory.createCommand("changeVersionsStrategy"));
-		commands.put("create", commandFactory.createCommand("create"));
-		commands.put("disableVersionsManagement", commandFactory.createCommand("disableVersionsManagement"));
-		commands.put("edit", commandFactory.createCommand("edit"));
-		commands.put("enableVersionsManagement", commandFactory.createCommand("enableVersionsManagement"));
-		commands.put("load", commandFactory.createCommand("load"));
-		commands.put("rollbackToPreviousVersion", commandFactory.createCommand("rollbackToPreviousVersion"));
-		commands.put("save", commandFactory.createCommand("save"));
-		
-		
+		commands = new HashMap<String, Command>();
+		for (String comm : commandList) {
+			commands.put(comm, commandFactory.createCommand(comm));
+		}		
 	}
 	
 	public void enact(String command) {

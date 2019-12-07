@@ -1,7 +1,5 @@
 package controller.commands;
 
-import java.util.HashMap;
-
 import model.DocumentManager;
 import model.VersionsManager;
 
@@ -18,9 +16,7 @@ public class CommandFactory {
 
 
 	public Command createCommand(String type) {
-		//if(type.equals("addLatex")) {
-		//	return new AddLatexCommand(versionsManager);
-		//}
+
 		if(type.equals("changeVersionsStrategy")) {
 			return new ChangeVersionsStrategyCommand(versionsManager);
 		}

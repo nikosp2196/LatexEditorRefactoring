@@ -28,6 +28,27 @@ public class FileManager {
 		vManager.setDocument(currentDocument);
 	}
 	
+	public String[] loadFromFile(String filename) {
+		String fileContents = "";
+		String type = "";
+		String[] result = {"",""};
+		try {
+			Scanner scanner = new Scanner(new FileInputStream(filename));
+			while(scanner.hasNextLine()) {
+				fileContents = fileContents + scanner.nextLine() + "\n";
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		type = defineTemplate(fileContents.trim());
+		result[0] = type;
+		result[1] = fileContents;
+
+		return result;
+	}
+	
 	public void arrangeType(VersionsManager vManager) {
 		String rawContents = vManager.getDocument().getContents();
 		String type = defineTemplate(rawContents.trim());
