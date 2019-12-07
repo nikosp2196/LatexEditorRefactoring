@@ -7,14 +7,17 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.Document;
+import model.FileManager;
+import model.VersionsManager;
 
 public class StableVersionsStrategy implements VersionsStrategy{
 	private String versionID = "";
+	FileManager fManager = new FileManager();
 	@Override
 	public void putVersion(Document document) {
 		// TODO Auto-generated method stub
 		String filename = document.getVersionID() + ".tex";
-		document.save(filename);
+		fManager.saveToFile(filename, document.getContents());
 		versionID = document.getVersionID();
 		
 	}
@@ -45,7 +48,9 @@ public class StableVersionsStrategy implements VersionsStrategy{
 		// TODO Auto-generated method stub
 		for(int i = 0; i < documents.size(); i++) {
 			Document doc = documents.get(i);
-			doc.save(doc.getVersionID() +".tex");
+			String filename = doc.getVersionID() +".tex";
+			String contents = doc.getContents();
+			fManager.saveToFile(filename, contents);
 		}
 		if(documents.size() > 0)
 			versionID = documents.get(documents.size()-1).getVersionID();

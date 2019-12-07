@@ -7,12 +7,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class FileManager {
-	private VersionsManager vManager;
-	public FileManager(VersionsManager vManager) {
-		this.vManager = vManager;
-	}
-	
-	public void loadFromFile() {
+	public void loadFromFile(VersionsManager vManager) {
 		String fileContents = "";
 		Document currentDocument;
 		String type;
@@ -35,8 +30,7 @@ public class FileManager {
 		vManager.setDocument(currentDocument);
 	}
 	
-	public void saveToFile(String filename) {
-		String contents = vManager.getDocument().getContents();
+	public void saveToFile(String filename, String contents) {
 		try {
 			PrintWriter printWriter = new PrintWriter(new FileOutputStream(filename));
 			printWriter.write(contents);

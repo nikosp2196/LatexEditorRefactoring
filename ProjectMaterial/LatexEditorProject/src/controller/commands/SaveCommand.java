@@ -11,10 +11,10 @@ public class SaveCommand extends AbstractCommand {
 	
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
+		FileManager fManager = new FileManager();
 		String filename = versionsManager.getFilename();
-		FileManager fManager = new FileManager(versionsManager);
-		fManager.saveToFile(filename);
+		String contents = versionsManager.getDocument().getContents();
+		fManager.saveToFile(filename, contents);
 	}
 
 }

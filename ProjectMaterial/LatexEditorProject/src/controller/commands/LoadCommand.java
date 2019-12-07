@@ -12,7 +12,7 @@ public class LoadCommand extends AbstractCommand {
 
 	@Override
 	public void execute() {
-		FileManager fManager = new FileManager(versionsManager);
-		fManager.loadFromFile();
+		FileManager fManager = new FileManager();
+		fManager.loadFromFile(versionsManager);
 	}
 }

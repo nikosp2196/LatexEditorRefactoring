@@ -2,6 +2,7 @@ package model.strategies;
 
 import java.util.HashMap;
 
+
 public class VersionsStrategyFactory {
 	private HashMap<String, VersionsStrategy> strategies;
 	

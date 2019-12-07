@@ -43,5 +43,4 @@ public class Document {
 		// TODO Auto-generated method stub
 		return versionID;
 	}
-	
 }
