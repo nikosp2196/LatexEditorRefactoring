@@ -25,9 +25,13 @@ public class FileManager {
 		}
 		currentDocument = new Document();
 		currentDocument.setContents(fileContents);
-		type = defineTemplate(fileContents.trim());
-		vManager.setDocumentType(type);
 		vManager.setDocument(currentDocument);
+	}
+	
+	public void arrangeType(VersionsManager vManager) {
+		String rawContents = vManager.getDocument().getContents();
+		String type = defineTemplate(rawContents.trim());
+		vManager.setDocumentType(type);
 	}
 	
 	public void saveToFile(String filename, String contents) {

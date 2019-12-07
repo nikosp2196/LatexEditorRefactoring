@@ -18,7 +18,10 @@ public class LatexEditorController{
 		CommandFactory commandFactory = new CommandFactory(versionsManager);
 		
 		commands = new HashMap<String, Command>(); 
-		//commands.put("addLatex", commandFactory.createCommand("addLatex"));
+		commands.put("loadRot13", commandFactory.createCommand("loadRot13"));
+		commands.put("saveRot13", commandFactory.createCommand("saveRot13"));
+		commands.put("loadAtbash", commandFactory.createCommand("loadAtbash"));
+		commands.put("saveAtbash", commandFactory.createCommand("saveAtbash"));
 		commands.put("changeVersionsStrategy", commandFactory.createCommand("changeVersionsStrategy"));
 		commands.put("create", commandFactory.createCommand("create"));
 		commands.put("disableVersionsManagement", commandFactory.createCommand("disableVersionsManagement"));
@@ -27,6 +30,7 @@ public class LatexEditorController{
 		commands.put("load", commandFactory.createCommand("load"));
 		commands.put("rollbackToPreviousVersion", commandFactory.createCommand("rollbackToPreviousVersion"));
 		commands.put("save", commandFactory.createCommand("save"));
+		
 		
 	}
 	

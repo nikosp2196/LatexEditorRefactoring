@@ -45,6 +45,18 @@ public class CommandFactory {
 		if(type.equals("save")) {
 			return new SaveCommand(versionsManager);
 		}
+		if(type.equals("loadRot13")) {
+			return new LoadRot13Command(versionsManager);
+		}
+		if(type.equals("saveRot13")) {
+			return new SaveRot13Command(versionsManager);
+		}
+		if(type.equals("loadAtbash")) {
+			return new LoadAtbashCommand(versionsManager);
+		}
+		if(type.equals("saveAtbash")) {
+			return new SaveAtbashCommand(versionsManager);
+		}
 		return null;
 	}
 }

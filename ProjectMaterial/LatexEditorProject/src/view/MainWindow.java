@@ -56,8 +56,12 @@ public class MainWindow {
 		menuBar.setBounds(0, 0, 805, 26);
 		frame.getContentPane().add(menuBar);
 		
+		
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
+		
+		JMenuItem addChapter = new JMenuItem("Add chapter");
+		JMenu mnCommands = new JMenu("Commands");
 		
 		JMenuItem mntmNewFile = new JMenuItem("New file");
 		mntmNewFile.addActionListener(new ActionListener() {
@@ -76,10 +80,33 @@ public class MainWindow {
 			}
 		});
 		mnFile.add(mntmSave);
-		JMenuItem addChapter = new JMenuItem("Add chapter");
-		JMenu mnCommands = new JMenu("Commands");
-		JMenuItem mntmLoadFile = new JMenuItem("Load file");
-		mntmLoadFile.addActionListener(new ActionListener() {
+		
+		JMenu mnLoad = new JMenu("Load From File");
+		mnFile.add(mnLoad);
+		
+		JMenu mnSave = new JMenu("Save To File");
+		mnFile.add(mnSave);
+		
+		JMenuItem mntmDefaultSave = new JMenuItem("Default Latex");
+		
+		mnSave.add(mntmDefaultSave);
+		mntmDefaultSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				int option = filechooser.showSaveDialog(null);
+				if(option == JFileChooser.APPROVE_OPTION) {
+					String filename = filechooser.getSelectedFile().toString();
+					if(filename.endsWith(".tex") == false) {
+						filename = filename+".tex";
+					}
+					latexEditorController.getVersionsManager().setFilename(filename);
+					latexEditorController.enact("save");
+				}
+				
+			}
+		});
+		JMenuItem mntmDefaultLoad = new JMenuItem("Default Latex");
+		mntmDefaultLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser filechooser = new JFileChooser();
 				int option = filechooser.showOpenDialog(null);
@@ -100,10 +127,10 @@ public class MainWindow {
 				}
 			}
 		});
-		mnFile.add(mntmLoadFile);
+		mnLoad.add(mntmDefaultLoad);
 		
-		JMenuItem mntmSaveFile = new JMenuItem("Save file");
-		mntmSaveFile.addActionListener(new ActionListener() {
+		JMenuItem mntmRot13Save = new JMenuItem("Rot13");
+		mntmRot13Save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser filechooser = new JFileChooser();
 				int option = filechooser.showSaveDialog(null);
@@ -113,12 +140,80 @@ public class MainWindow {
 						filename = filename+".tex";
 					}
 					latexEditorController.getVersionsManager().setFilename(filename);
-					latexEditorController.enact("save");
+					latexEditorController.enact("saveRot13");
 				}
 				
 			}
 		});
-		mnFile.add(mntmSaveFile);
+		mnSave.add(mntmRot13Save);
+		
+		JMenuItem mntmRot13Load = new JMenuItem("Rot13");
+		mntmRot13Load.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser filechooser = new JFileChooser();
+				int option = filechooser.showOpenDialog(null);
+				if(option == JFileChooser.APPROVE_OPTION) {
+					String filename = filechooser.getSelectedFile().toString();
+					
+					latexEditorController.getVersionsManager().setFilename(filename);
+					latexEditorController.enact("loadRot13");
+					mnCommands.setEnabled(true);
+					addChapter.setEnabled(true);
+					editorPane.setText(latexEditorController.getVersionsManager().getDocument().getContents());
+					if(latexEditorController.getVersionsManager().getType().equals("letterTemplate")) {
+						mnCommands.setEnabled(false);
+					}
+					if(latexEditorController.getVersionsManager().getType().equals("articleTemplate")) {
+						addChapter.setEnabled(false);
+					}
+				}
+			}
+		});
+		mnLoad.add(mntmRot13Load);
+		
+		JMenuItem mntmAtbashSave = new JMenuItem("Atbash");
+		mntmAtbashSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser filechooser = new JFileChooser();
+				int option = filechooser.showSaveDialog(null);
+				if(option == JFileChooser.APPROVE_OPTION) {
+					String filename = filechooser.getSelectedFile().toString();
+					if(filename.endsWith(".tex") == false) {
+						filename = filename+".tex";
+					}
+					latexEditorController.getVersionsManager().setFilename(filename);
+					latexEditorController.enact("saveAtbash");
+				}
+				
+			}
+		});
+		mnSave.add(mntmAtbashSave);
+		
+		JMenuItem mntmAtbashLoad = new JMenuItem("Atbash");
+		
+		mntmAtbashLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser filechooser = new JFileChooser();
+				int option = filechooser.showOpenDialog(null);
+				if(option == JFileChooser.APPROVE_OPTION) {
+					String filename = filechooser.getSelectedFile().toString();
+					
+					latexEditorController.getVersionsManager().setFilename(filename);
+					latexEditorController.enact("loadAtbash");
+					mnCommands.setEnabled(true);
+					addChapter.setEnabled(true);
+					editorPane.setText(latexEditorController.getVersionsManager().getDocument().getContents());
+					if(latexEditorController.getVersionsManager().getType().equals("letterTemplate")) {
+						mnCommands.setEnabled(false);
+					}
+					if(latexEditorController.getVersionsManager().getType().equals("articleTemplate")) {
+						addChapter.setEnabled(false);
+					}
+				}
+			}
+		});
+		mnLoad.add(mntmAtbashLoad);
+		
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.addActionListener(new ActionListener() {

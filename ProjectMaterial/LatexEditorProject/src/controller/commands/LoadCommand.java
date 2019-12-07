@@ -14,5 +14,6 @@ public class LoadCommand extends AbstractCommand {
 	public void execute() {
 		FileManager fManager = new FileManager();
 		fManager.loadFromFile(versionsManager);
+		fManager.arrangeType(versionsManager);
 	}
 }

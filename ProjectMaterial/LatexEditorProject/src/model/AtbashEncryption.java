@@ -1,22 +1,23 @@
 package model;
 
-public class Rot13Encryption{
+public class AtbashEncryption {
 
-	public Document executeRot13(Document doc) {
+	public Document executeAtbash(Document doc) {
 		String inputText = doc.getContents();
 		char[] textArray = inputText.toCharArray();
 		String outputText = "";
 		
 	    for (char ch : textArray) {
 	      int input = (int)ch;
-	      int output = rotateCharacters(input);
+	      int output = reverseCharacters(input);
 	      outputText += String.valueOf((char) output);
 	    }
 	    doc.setContents(outputText);
 	    return doc;
 	}
+	
 
-	public static int rotateCharacters(int input) {
+	public static int reverseCharacters(int input) {
 	    int output = -1;
 	    if (input>=65 && input <= 90){
 	      output = encrypt(65, 90, input);
@@ -27,8 +28,8 @@ public class Rot13Encryption{
 	    }
 	    return output;
 	}
-	
+
 	public static int encrypt(int start, int end, int value){
-	    return start + (value - start + 13)%26;
+		return start + (end - value);
 	}
 }
