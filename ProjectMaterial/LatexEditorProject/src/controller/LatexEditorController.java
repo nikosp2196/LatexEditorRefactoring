@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import controller.commands.Command;
 import controller.commands.CommandFactory;
-import model.FileManager;
 import model.LatexSyntaxManager;
 import model.VersionsManager;
 
@@ -24,7 +23,7 @@ public class LatexEditorController{
 	}
 	
 	public void enact(String command) {
-		commands.get(command).execute();
+		commands.get(command).execute(); 
 	}
 	
 	public VersionsManager getVersionsManager() {

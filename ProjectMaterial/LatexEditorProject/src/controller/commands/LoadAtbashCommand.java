@@ -2,7 +2,6 @@ package controller.commands;
 
 import model.AtbashEncryption;
 import model.FileManager;
-import model.Rot13Encryption;
 import model.VersionsManager;
 
 public class LoadAtbashCommand extends AbstractCommand{

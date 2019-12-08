@@ -1,28 +1,26 @@
 package controller.commands;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
-import model.Document;
 import model.DocumentManager;
 import model.VersionsManager;
-import model.strategies.StableVersionsStrategy;
-import model.strategies.VersionsStrategy;
-import model.strategies.VolatileVersionsStrategy;
+
+
 class EnableVersionsManagementCommandTest {
 	private DocumentManager documentManager = new DocumentManager();
 	private VersionsManager versionsManager = new VersionsManager();
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
-	private EditCommand editCommand = new EditCommand(versionsManager);
 	private EnableVersionsManagementCommand enableCommand = new EnableVersionsManagementCommand(versionsManager);
+	private DisableVersionsManagementCommand disableCommand = new DisableVersionsManagementCommand(versionsManager);
 	
 	@Test
 	void testVolatile() {
-		Document doc = new Document();
-		versionsManager.setDocument(doc);
-		//versionsManager.disable();
+		disableCommand.execute();
+		versionsManager.setDocumentType("letterTemplate");
+		System.out.println(versionsManager.getStrategyString());
+		createCommand.execute();
 		String initialContent = versionsManager.getDocument().getContents();
+		versionsManager.setStrategyString("volatile");
 		enableCommand.execute();
 		versionsManager.setContent("Some new contents.");
 		versionsManager.saveContents();
@@ -32,20 +30,17 @@ class EnableVersionsManagementCommandTest {
 	}
 	@Test
 	void testStable() {
-		VersionsStrategy strategy = new StableVersionsStrategy();
-		versionsManager.setStrategyString(strategy);
-		
-		latexEditorView.setType("articleTemplate");
-		latexEditorView.setVersionsManager(versionsManager);
+		disableCommand.execute();
+		versionsManager.setDocumentType("letterTemplate");
+		System.out.println(versionsManager.getStrategyString());
 		createCommand.execute();
-		String actualContents = latexEditorView.getCurrentDocument().getContents();
-		latexEditorView.setStrategyString("stable");
+		String initialContent = versionsManager.getDocument().getContents();
+		versionsManager.setStrategyString("stable");
 		enableCommand.execute();
-		latexEditorView.setText("test edit contents\n");
-		editCommand.execute();
+		versionsManager.setContent("Some new contents.");
+		versionsManager.saveContents();
+		String previousContent = versionsManager.getStrategy().getVersion().getContents();
 		
-		String contents = strategy.getVersion().getContents();
-		
-		assertEquals(contents, actualContents);
+		assertEquals(initialContent, previousContent);
 	}
 }

@@ -22,7 +22,6 @@ public class VolatileVersionsStrategy implements VersionsStrategy {
  
 	@Override
 	public Document getVersion() {
-		// TODO Auto-generated method stub
 		if(history.size() == 0)
 			return null;
 		return history.get(history.size() - 1);
@@ -30,7 +29,6 @@ public class VolatileVersionsStrategy implements VersionsStrategy {
 
 	@Override
 	public void setEntireHistory(List<Document> documents) {
-		// TODO Auto-generated method stub
 		history.clear();
 		history.addAll(documents);
 	}

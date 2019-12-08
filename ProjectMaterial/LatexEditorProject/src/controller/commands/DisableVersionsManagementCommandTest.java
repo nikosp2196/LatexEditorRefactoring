@@ -6,33 +6,42 @@ import org.junit.jupiter.api.Test;
 
 import model.DocumentManager;
 import model.VersionsManager;
-import model.strategies.StableVersionsStrategy;
-import model.strategies.VersionsStrategy;
-import model.strategies.VolatileVersionsStrategy;
-import view.LatexEditorView;
 
 class DisableVersionsManagementCommandTest {
-	private LatexEditorView latexEditorView = new LatexEditorView();
 	private DocumentManager documentManager = new DocumentManager();
-	private VersionsManager versionsManager = new VersionsManager(null, latexEditorView);
+	private VersionsManager versionsManager = new VersionsManager();
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
 	private EditCommand editCommand = new EditCommand(versionsManager);
 	private DisableVersionsManagementCommand disableCommand = new DisableVersionsManagementCommand(versionsManager);
-
 	@Test
 	void testVolatile() {
-		VersionsStrategy strategy = new VolatileVersionsStrategy();
-		versionsManager.setStrategyString(strategy);
 		
-		latexEditorView.setType("articleTemplate");
-		latexEditorView.setVersionsManager(versionsManager);
+		
+		versionsManager.setDocumentType("articleTemplate");
 		createCommand.execute();
-		latexEditorView.setStrategyString("volatile");
+		versionsManager.setContent("Some Changes.");
+		editCommand.execute();
+		int historySize = versionsManager.getStrategy().getEntireHistory().size();
 		disableCommand.execute();
-		latexEditorView.setText("test edit contents\n");
+		versionsManager.setContent("Some more changes.");
 		editCommand.execute();
 		
 		assertEquals(versionsManager.isEnabled(), false);
-		assertEquals(strategy.getEntireHistory().size(), 0);
+		assertEquals(versionsManager.getStrategy().getEntireHistory().size(), historySize);
+	}
+	@Test
+	void testStable() {
+		versionsManager.setStrategyString("stable");
+		versionsManager.setDocumentType("articleTemplate");
+		createCommand.execute();
+		versionsManager.setContent("Some Changes.");
+		editCommand.execute();
+		int historySize = versionsManager.getStrategy().getEntireHistory().size();
+		disableCommand.execute();
+		versionsManager.setContent("Some more changes.");
+		editCommand.execute();
+		
+		assertEquals(versionsManager.isEnabled(), false);
+		assertEquals(versionsManager.getStrategy().getEntireHistory().size(), historySize);
 	}
 }
