@@ -14,7 +14,7 @@ public class VersionsManager {
 	private String filename;
 	private String documentType;
 	private String content;
-	
+
 	public VersionsManager() {
 		factory = new VersionsStrategyFactory();
 		strategy = factory.createStrategy("volatile");
@@ -58,11 +58,15 @@ public class VersionsManager {
 		setStrategy();
 		enable();
 	}
-
+ 
 	public void setStrategy() {
 		VersionsStrategy newStrategy = factory.createStrategy(strategyString);
 		newStrategy.setEntireHistory(strategy.getEntireHistory());
 		strategy = newStrategy;
+	}
+	
+	public VersionsStrategy getStrategy() {
+		return strategy;
 	}
 
 	public void  putVersion(Document document) {
