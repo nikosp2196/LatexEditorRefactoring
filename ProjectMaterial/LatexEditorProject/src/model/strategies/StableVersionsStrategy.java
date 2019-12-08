@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import model.Document;
 import model.FileManager;
-import model.VersionsManager;
 
 public class StableVersionsStrategy implements VersionsStrategy{
 	private String versionID = "";
@@ -34,6 +33,7 @@ public class StableVersionsStrategy implements VersionsStrategy{
 			while(scanner.hasNextLine()) {
 				fileContents = fileContents + scanner.nextLine() + "\n";
 			}
+			scanner.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -72,6 +72,7 @@ public class StableVersionsStrategy implements VersionsStrategy{
 				while(scanner.hasNextLine()) {
 					fileContents = fileContents + scanner.nextLine() + "\n";
 				}
+				scanner.close();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

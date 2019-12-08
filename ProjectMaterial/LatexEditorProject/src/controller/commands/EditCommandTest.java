@@ -9,20 +9,19 @@ import model.VersionsManager;
 import view.LatexEditorView;
 
 class EditCommandTest {
-	private LatexEditorView latexEditorView = new LatexEditorView();
 	private DocumentManager documentManager = new DocumentManager();
-	private VersionsManager versionsManager = new VersionsManager(null, latexEditorView);
+	private VersionsManager versionsManager = new VersionsManager();
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
 	private EditCommand editCommand = new EditCommand(versionsManager);
 
 	@Test
 	void test() {
-		latexEditorView.setType("articleTemplate");
+		versionsManager.setDocumentType("articleTemplate");
 		createCommand.execute();
 		
-		latexEditorView.setText("test edit contents\n");
+		versionsManager.setContent("test edit contents\n");
 		editCommand.execute();
-		String actualContents = latexEditorView.getCurrentDocument().getContents();
+		String actualContents = versionsManager.getDocument().getContents();
 		
 		assertEquals("test edit contents\n", actualContents);
 	}

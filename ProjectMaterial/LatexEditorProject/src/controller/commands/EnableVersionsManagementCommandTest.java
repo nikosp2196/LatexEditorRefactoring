@@ -9,12 +9,9 @@ import model.VersionsManager;
 import model.strategies.StableVersionsStrategy;
 import model.strategies.VersionsStrategy;
 import model.strategies.VolatileVersionsStrategy;
-import view.LatexEditorView;
-
 class EnableVersionsManagementCommandTest {
-	private LatexEditorView latexEditorView = new LatexEditorView();
 	private DocumentManager documentManager = new DocumentManager();
-	private VersionsManager versionsManager = new VersionsManager(null, latexEditorView);
+	private VersionsManager versionsManager = new VersionsManager();
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
 	private EditCommand editCommand = new EditCommand(versionsManager);
 	private EnableVersionsManagementCommand enableCommand = new EnableVersionsManagementCommand(versionsManager);
