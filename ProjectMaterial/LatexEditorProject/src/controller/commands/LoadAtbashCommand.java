@@ -17,7 +17,7 @@ public class LoadAtbashCommand extends AbstractCommand{
 		fManager.loadFromFile(versionsManager);
 		versionsManager.setDocument(atbash.executeAtbash(versionsManager.getDocument()));
 		fManager.arrangeType(versionsManager);
-		
+	
 	}
 
 }

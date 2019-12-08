@@ -20,7 +20,7 @@ class LoadCommandTest {
 		versionsManager.setDocumentType("articleTemplate");
 		createCommand.execute();
 		versionsManager.setFilename("test.tex");
-		loadCommand.execute();
+		loadCommand.execute(); 
 		String fileContents = "";
 		try {
 			Scanner scanner = new Scanner(new FileInputStream("test.tex"));
@@ -29,7 +29,6 @@ class LoadCommandTest {
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String actualContents = versionsManager.getDocument().getContents();
