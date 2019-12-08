@@ -28,8 +28,10 @@ public class DocumentManager {
 				doc.setContents(temp[1]);
 				templates.put(temp[0], doc);
 			}
-			
 		}
+		Document doc = new Document();
+		doc.setContents("");
+		templates.put("emptyTemplate", doc);
 		
 	}
 }

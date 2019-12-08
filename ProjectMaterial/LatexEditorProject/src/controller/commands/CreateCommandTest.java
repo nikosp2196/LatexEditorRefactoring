@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 import controller.LatexEditorController;
 import model.DocumentManager;
 import model.VersionsManager;
-import view.LatexEditorView;
 
 class CreateCommandTest {
-	private LatexEditorView latexEditorView = new LatexEditorView();
+	//private LatexEditorView latexEditorView = new LatexEditorView();
 	private DocumentManager documentManager = new DocumentManager();
-	private VersionsManager versionsManager = new VersionsManager(null, latexEditorView);
+	private VersionsManager versionsManager = new VersionsManager();
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
 
 	@Test
 	void test1() {
-		latexEditorView.setType("articleTemplate");
+		//latexEditorView.setType("articleTemplate");
+		versionsManager.setDocumentType("articleTemplate");
 		createCommand.execute();
 		String contents = "\\documentclass[11pt,twocolumn,a4paper]{article}\n\n"+
 
@@ -39,14 +39,15 @@ class CreateCommandTest {
 				"\\section*{References}\n\n"+
 
 				"\\end{document}\n";
-		String actualContents = latexEditorView.getCurrentDocument().getContents();
+		String actualContents = versionsManager.getDocument().getContents();
 		
 		assertEquals(contents, actualContents);
 	}
 
 	@Test
 	void test2() {
-		latexEditorView.setType("letterTemplate");
+		//latexEditorView.setType("letterTemplate");
+		versionsManager.setDocumentType("letterTemplate");
 		createCommand.execute();
 		String contents = "\\documentclass{letter}\n"+
 				"\\usepackage{hyperref}\n"+
@@ -60,7 +61,7 @@ class CreateCommandTest {
 				"I am writing to you .......\n\n\n"+
 
 
-				"\\closing{Yours Faithfully,}\n"+
+				"\\closing{Yours Faithfully,}\n\n"+
 
 				"\\ps\n\n"+
 
@@ -70,14 +71,14 @@ class CreateCommandTest {
 
 				"\\end{letter}\n"+
 				"\\end{document}\n";
-		String actualContents = latexEditorView.getCurrentDocument().getContents();
+		String actualContents = versionsManager.getDocument().getContents();
 		
 		assertEquals(contents, actualContents);
 	}
 	
 	@Test
 	void test3() {
-		latexEditorView.setType("reportTemplate");
+		versionsManager.setDocumentType("reportTemplate");
 		createCommand.execute();
 		String contents = "\\documentclass[11pt,a4paper]{report}\n\n"+
 
@@ -105,17 +106,18 @@ class CreateCommandTest {
 				"\\chapter*{References}\n\n"+
 
 				"\\end{document}\n";
-		String actualContents = latexEditorView.getCurrentDocument().getContents();
+		String actualContents = versionsManager.getDocument().getContents();
 		
 		assertEquals(contents, actualContents);
 	}
 	@Test
 	void test4() {
-		latexEditorView.setType("bookTemplate");
+		versionsManager.setDocumentType("bookTemplate");
 		createCommand.execute();
-		String contents = "\\documentclass[11pt,a4paper]{book}\n\n"+
-
-				"\\begin{document}\n"+
+		String contents = "\\documentclass[11pt,a4paper]{book}\n"+
+				"\\usepackage{graphicx} \n\n"+
+				"\\begin{document}\n\n"+
+				
 				"\\title{Book: How to Structure a LaTeX Document}\n"+
 				"\\author{Author1 \\and Author2 \\and ...}\n"+
 				"\\date{\\today}\n\n"+
@@ -124,13 +126,12 @@ class CreateCommandTest {
 
 				"\\frontmatter\n\n"+
 
-				"\\chapter{Preface}\n"+
-				"% ...\n\n"+
+				"\\chapter{Preface}\n\n"+
 
-				"\\mainmatter\n"+
-				"\\chapter{First chapter}\n"+
+				"\\mainmatter\n\n"+
+				"\\chapter{First chapter}\n\n"+
 				"\\section{Section Title 1}\n"+
-				"\\section{Section Title 2}\n\n"+
+				"\\section{Section Title 2}\n"+
 
 				"\\section{Section Title.....}\n\n"+
 
@@ -138,24 +139,24 @@ class CreateCommandTest {
 
 				"\\chapter{Conclusion}\n\n"+
 
-				"\\chapter*{References}\n\n\n"+
+				"\\chapter*{References}\n\n"+
 
 
-				"\\backmatter\n"+
+				"\\backmatter\n\n"+
 				"\\chapter{Last note}\n\n"+
 
-				"\\end{document}\n";
-		String actualContents = latexEditorView.getCurrentDocument().getContents();
+				"\\end{document}\n\n";
+		String actualContents = versionsManager.getDocument().getContents();
 		
 		assertEquals(contents, actualContents);
 	}
 	
 	@Test
 	void test5() {
-		latexEditorView.setType("emptyTemplate");
+		versionsManager.setDocumentType("emptyTemplate");
 		createCommand.execute();
 		String contents = "";
-		String actualContents = latexEditorView.getCurrentDocument().getContents();
+		String actualContents = versionsManager.getDocument().getContents();
 		
 		assertEquals(contents, actualContents);
 	}
