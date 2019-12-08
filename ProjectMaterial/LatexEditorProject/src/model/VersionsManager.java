@@ -33,19 +33,12 @@ public class VersionsManager {
 		enabled = false;
 	}
 	
-	//TODO: Useless method same as setDocument().
-	public void setCurrentVersion(Document document) {
-		setDocument(document);
-	}
-
 	public String getType() {
-		// TODO Auto-generated method stub
 		return getDocumentType();
 	}
 	
 	//TODO: Check where this method is called in view package.
 	public void saveContents() {
-		// TODO Auto-generated method stub
 		if(isEnabled()) {
 			putVersion(activeDocument);
 			activeDocument.increaseVersionID();
@@ -54,7 +47,6 @@ public class VersionsManager {
 	}
 
 	public void enableStrategy() {
-		// TODO Auto-generated method stub
 		setStrategy();
 		enable();
 	}
@@ -70,12 +62,10 @@ public class VersionsManager {
 	}
 
 	public void  putVersion(Document document) {
-		// TODO Auto-generated method stub
 		strategy.putVersion(document);
 	}
 
 	public void rollbackToPreviousVersion() {
-		// TODO Auto-generated method stub
 		if(isEnabled()) {
 			Document doc = strategy.getVersion();
 			if(doc == null) {
@@ -91,7 +81,6 @@ public class VersionsManager {
 	}
 
 	public String getStrategyString() {
-		// TODO Auto-generated method stub
 		return strategyString;
 	}
 	

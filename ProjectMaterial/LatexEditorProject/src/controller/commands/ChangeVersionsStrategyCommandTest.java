@@ -3,14 +3,10 @@ package controller.commands;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
-import model.DocumentManager;
 import model.VersionsManager;
 import model.strategies.VersionsStrategy;
 
 class ChangeVersionsStrategyCommandTest {
-	//private LatexEditorView latexEditorView = new LatexEditorView();
-	private DocumentManager documentManager = new DocumentManager();
 	private VersionsManager versionsManager = new VersionsManager();
 	private ChangeVersionsStrategyCommand changeCommand = new ChangeVersionsStrategyCommand(versionsManager);
 

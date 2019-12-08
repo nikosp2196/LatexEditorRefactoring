@@ -10,7 +10,6 @@ public class FileManager {
 	public void loadFromFile(VersionsManager vManager) {
 		String fileContents = "";
 		Document currentDocument;
-		String type;
 		String filename = vManager.getFilename();
 		
 		try {

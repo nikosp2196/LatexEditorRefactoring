@@ -17,7 +17,7 @@ public class CreateCommand extends AbstractCommand {
 		// TODO Auto-generated method stub
 		String type = versionsManager.getType();
 		Document document = documentManager.createDocument(type);
-		versionsManager.setCurrentVersion(document);
+		versionsManager.setDocument(document);
 	}
 
 }

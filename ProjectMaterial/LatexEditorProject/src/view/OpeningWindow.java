@@ -57,26 +57,16 @@ public class OpeningWindow {
 				frame.dispose();
 			}
 		});
-		btnCreateNewDocument.setBounds(89, 26, 278, 36);
+		btnCreateNewDocument.setBounds(99, 100, 268, 36);
 		frame.getContentPane().add(btnCreateNewDocument);
-		//TODO: Add enact("load") somewhere here
-		JButton btnOpenExistingDocument = new JButton("Open Existing Document");
-		btnOpenExistingDocument.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser chooser = new JFileChooser();
-				chooser.showOpenDialog(null);
-			}
-		});
-		btnOpenExistingDocument.setBounds(89, 92, 278, 36);
-		frame.getContentPane().add(btnOpenExistingDocument);
-		
+
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(99, 169, 268, 25);
+		btnExit.setBounds(99, 150, 268, 36);
 		frame.getContentPane().add(btnExit);
 	}
 }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import model.Document;
 import model.DocumentManager;
 import model.VersionsManager;
 import model.strategies.StableVersionsStrategy;
@@ -15,24 +16,19 @@ class EnableVersionsManagementCommandTest {
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
 	private EditCommand editCommand = new EditCommand(versionsManager);
 	private EnableVersionsManagementCommand enableCommand = new EnableVersionsManagementCommand(versionsManager);
-
+	
 	@Test
 	void testVolatile() {
-		VersionsStrategy strategy = new VolatileVersionsStrategy();
-		versionsManager.setStrategyString(strategy);
-		
-		latexEditorView.setType("articleTemplate");
-		latexEditorView.setVersionsManager(versionsManager);
-		createCommand.execute();
-		String actualContents = latexEditorView.getCurrentDocument().getContents();
-		latexEditorView.setStrategyString("volatile");
+		Document doc = new Document();
+		versionsManager.setDocument(doc);
+		//versionsManager.disable();
+		String initialContent = versionsManager.getDocument().getContents();
 		enableCommand.execute();
-		latexEditorView.setText("test edit contents\n");
-		editCommand.execute();
+		versionsManager.setContent("Some new contents.");
+		versionsManager.saveContents();
+		String previousContent = versionsManager.getStrategy().getVersion().getContents();
 		
-		String contents = strategy.getVersion().getContents();
-		
-		assertEquals(contents, actualContents);
+		assertEquals(initialContent, previousContent);
 	}
 	@Test
 	void testStable() {

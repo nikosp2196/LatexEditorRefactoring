@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import model.DocumentManager;
 import model.VersionsManager;
-import view.LatexEditorView;
 
 class EditCommandTest {
 	private DocumentManager documentManager = new DocumentManager();
