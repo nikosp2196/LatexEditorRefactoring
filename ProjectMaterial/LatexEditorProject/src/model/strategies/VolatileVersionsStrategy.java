@@ -19,7 +19,7 @@ public class VolatileVersionsStrategy implements VersionsStrategy {
 		Document doc = document.clone();
 		history.add(doc);
 	}
-
+ 
 	@Override
 	public Document getVersion() {
 		// TODO Auto-generated method stub

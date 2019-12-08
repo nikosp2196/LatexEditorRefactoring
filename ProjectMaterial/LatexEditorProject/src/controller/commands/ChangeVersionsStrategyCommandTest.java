@@ -6,49 +6,40 @@ import org.junit.jupiter.api.Test;
 
 import model.DocumentManager;
 import model.VersionsManager;
-import model.strategies.StableVersionsStrategy;
 import model.strategies.VersionsStrategy;
-import model.strategies.VolatileVersionsStrategy;
-import view.LatexEditorView;
 
 class ChangeVersionsStrategyCommandTest {
-	private LatexEditorView latexEditorView = new LatexEditorView();
+	//private LatexEditorView latexEditorView = new LatexEditorView();
 	private DocumentManager documentManager = new DocumentManager();
-	private VersionsManager versionsManager = new VersionsManager(null, latexEditorView);
+	private VersionsManager versionsManager = new VersionsManager();
 	private ChangeVersionsStrategyCommand changeCommand = new ChangeVersionsStrategyCommand(versionsManager);
-	
+
 	@Test
 	void testVolatile() {
-		VersionsStrategy strategy = new VolatileVersionsStrategy();
-		versionsManager.setStrategyString(strategy);
+		VersionsStrategy currentStrategy = versionsManager.getStrategy();
 		
-		latexEditorView.setType("articleTemplate");
-		latexEditorView.setVersionsManager(versionsManager);
-		latexEditorView.setStrategyString("stable");
+		versionsManager.setStrategyString("stable");		
 		changeCommand.execute();
 		
-		String test = "test ok";
-		if(versionsManager.getStrategy() instanceof VolatileVersionsStrategy)
-			test = "not ok";
+		VersionsStrategy changedStrategy = versionsManager.getStrategy();
 		
-		assertEquals("test ok", test);
+		boolean notChanged = changedStrategy.equals(currentStrategy);
+		assertEquals(false, notChanged);
 	}
-	
 	@Test
-	void testStable() {
-		VersionsStrategy strategy = new StableVersionsStrategy();
-		versionsManager.setStrategyString(strategy);
-		
-		latexEditorView.setType("articleTemplate");
-		latexEditorView.setVersionsManager(versionsManager);
-		latexEditorView.setStrategyString("volatile");
+	void testStable() {	
+		versionsManager.setStrategyString("stable");
 		changeCommand.execute();
 		
-		String test = "test ok";
-		if(versionsManager.getStrategy() instanceof StableVersionsStrategy)
-			test = "not ok";
+		VersionsStrategy currentStrategy = versionsManager.getStrategy();
 		
-		assertEquals("test ok", test);
+		versionsManager.setStrategyString("volatile");
+		changeCommand.execute();
+		
+		VersionsStrategy changedStrategy = versionsManager.getStrategy();
+		
+		boolean notChanged = changedStrategy.equals(currentStrategy);
+		assertEquals(false, notChanged);
 	}
 		
 }
