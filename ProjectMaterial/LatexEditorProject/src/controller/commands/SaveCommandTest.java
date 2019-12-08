@@ -1,7 +1,6 @@
 package controller.commands;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

@@ -17,7 +17,6 @@ class EnableVersionsManagementCommandTest {
 	void testVolatile() {
 		disableCommand.execute();
 		versionsManager.setDocumentType("letterTemplate");
-		System.out.println(versionsManager.getStrategyString());
 		createCommand.execute();
 		String initialContent = versionsManager.getDocument().getContents();
 		versionsManager.setStrategyString("volatile");
@@ -32,7 +31,6 @@ class EnableVersionsManagementCommandTest {
 	void testStable() {
 		disableCommand.execute();
 		versionsManager.setDocumentType("letterTemplate");
-		System.out.println(versionsManager.getStrategyString());
 		createCommand.execute();
 		String initialContent = versionsManager.getDocument().getContents();
 		versionsManager.setStrategyString("stable");

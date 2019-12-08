@@ -15,7 +15,7 @@ class LoadRot13CommandTest {
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
 	
 	@Test
-	void test() {
+	void testLoadRot13() {
 		versionsManager.setFilename("rot13_test.tex");
 		rot13.execute();
 		String decodedInput = versionsManager.getDocument().getContents();

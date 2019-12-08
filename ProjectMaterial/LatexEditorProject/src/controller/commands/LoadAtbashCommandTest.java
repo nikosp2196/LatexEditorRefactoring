@@ -20,7 +20,7 @@ class LoadAtbashCommandTest {
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
 	
 	@Test
-	void test() {
+	void testLoadAtbash() {
 		versionsManager.setFilename("atbash_test.tex");
 		atbash.execute();
 		String decodedInput = versionsManager.getDocument().getContents();

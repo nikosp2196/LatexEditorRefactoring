@@ -8,14 +8,12 @@ import model.DocumentManager;
 import model.VersionsManager;
 
 class CreateCommandTest {
-	//private LatexEditorView latexEditorView = new LatexEditorView();
 	private DocumentManager documentManager = new DocumentManager();
 	private VersionsManager versionsManager = new VersionsManager();
 	private CreateCommand createCommand = new CreateCommand(documentManager, versionsManager);
 
 	@Test
 	void test1() {
-		//latexEditorView.setType("articleTemplate");
 		versionsManager.setDocumentType("articleTemplate");
 		createCommand.execute();
 		String contents = "\\documentclass[11pt,twocolumn,a4paper]{article}\n\n"+
@@ -45,7 +43,6 @@ class CreateCommandTest {
 
 	@Test
 	void test2() {
-		//latexEditorView.setType("letterTemplate");
 		versionsManager.setDocumentType("letterTemplate");
 		createCommand.execute();
 		String contents = "\\documentclass{letter}\n"+
