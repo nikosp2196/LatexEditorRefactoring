@@ -16,7 +16,6 @@ public class SaveRot13Command extends AbstractCommand{
 		FileManager fManager = new FileManager();
 		Rot13Encryption rot13 = new Rot13Encryption();
 		Document encoded = rot13.executeRot13(versionsManager.getDocument());
-		System.out.println(encoded.getContents());
 		String filename = versionsManager.getFilename();
 		String contents = encoded.getContents();
 		fManager.saveToFile(filename, contents);
