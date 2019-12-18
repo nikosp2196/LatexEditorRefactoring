@@ -16,9 +16,7 @@ public class DocumentManager {
 	
 	public void getTemplatesFromFile() {
 		FileManager fManager = new FileManager();
-		String currentPath = System.getProperty("user.dir");
-		File file = new File(currentPath);
-		File templateDir = new File(file.getParent()+"/tex-templates"); 
+		File templateDir = new File("tex-templates"); 
 
 		for(String filename : templateDir.list()) {
 			if(filename.endsWith(".tex")) {
